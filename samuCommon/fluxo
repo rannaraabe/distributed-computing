@@ -1,0 +1,68 @@
+- crud que recebe de varias maquinas essas solicitacoes-
+
+- recebe requisição do jMeter com ambulancia e localização 
+- manda uma requisição para o jMeter passando uma ambulancia e a localização
+
+- fazer um script para cada protocolo que vai rodar o programa java
+- ir no jmeter e rodar os testes, passou em tudo então está ok 
+
+
+o jmeter pode mandar um request dizendo que um policial X tá no lugar y
+ou mandar um request dizendo que uma pessoa precisa de um policial no lugar x
+aí o sistema responde qual policial vai buscar a pessoa
+aí tem que bloquear esse policial até esse policial dizer que já largou o passageiro
+isso tem q estar no banco, como uma coluna de bloqueados, pra quando mudar esse status atualizar lá
+isso tem q ser feito pq a máquina 1 vai ter uma lista de bloqueados e a máquina 2 vai ter outra lista de bloqueados
+são duas maquinas diferentes recebendo requests diferentes
+então as listas de bloqueados tbm vai ser diferente
+
+cria uma classe client
+no caso seria a interface client
+ela tem um método connect(string ip)
+aí vc vai ter a implementação abstrata
+UDPClient
+esse UDP client vai implementar esse connect só guardando qual é o IP pra onde vc vai mandar as coisas
+no futuro pode ter a implementação TCPClient
+aí vc cria as extensões dessa classe que vao ser ServiceAClient e DBClient
+aí a classe ServiceAClient vai implementar as funções que se comunicam com o ServiceA
+e a classe DBClient faz as funções que se comunicam com o banco
+aí quando vc precisar que haja uma comunicação entre dois serviços
+vc coloca ServiceAClient como um membro
+
+---------------------------------------------------------------------------------
+
+todo:
+- corrigir banco backup do tcp
+- criar protocolo http
+
+done:
+- criar entidades
+- criar classe abstrata com o método do udp
+- criar banco principal
+- organizar codigo
+- fazer inteligencia
+- testar protocolo udp
+- corrigir o banco para salvar dados em txt
+- fazer tratamento de erro caso o udpservice envie o pacote para uma porta q esteja desligava
+- criar protocolo tcp
+
+status:
+1 - disponível
+2 - ocupado
+
+queries:
+// extra
+POST/samu/1/-5.883976281873694/-35.21307989281678/LSN4I49/Maria/121212129/Hospital Ana Bezerra/20-11-2021/1/
+PUT/samu/1/-5.883976281873694/-35.21307989281678/LSN4I49/Maria Lima/121212129/Hospital Ana Bezerra/20-11-2021/1/
+
+
+// carrefour
+POST/samu/1/-5.843829960340464/-35.210693141913765/ABC4I23/José/000000009/Hospital Walfredo Gurgel/23-11-2021/1/
+
+// sam's club
+POST/samu/1/-5.859229970994079/-35.21431294697931/RRF4C14/Ranna/333333339/Hospital Teste/17-11-2021/2/
+
+
+GET/samu/10/
+GET/samu/5/
+
